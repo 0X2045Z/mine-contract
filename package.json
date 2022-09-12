@@ -1,0 +1,31 @@
+{
+  "name": "mine_contract",
+  "version": "1.0.0",
+  "description": "Hardhat是一个方便在以太坊上进行构建的任务运行器。使用它可以帮助开发人员管理和自动化构建智能合约和dApp的过程中固有的重复任务，以及轻松地围绕此工作流程引入更多功能。 Hardhat还内置了Hardhat 网络，Hardhat 网络是为开发而设计的本地以太坊网络。 用来部署合约，运行测试和调试代码。 ## 安装HardHat - 初始化一个npm项目     npm init --yes - 安装hardhat     npm install --save-dev hardhat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0X2045Z/Mine_Contract.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0X2045Z/Mine_Contract/issues"
+  },
+  "homepage": "https://github.com/0X2045Z/Mine_Contract#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.1.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "chai": "^4.3.6",
+    "ethereum-waffle": "^3.4.4",
+    "ethers": "^5.7.0",
+    "hardhat": "^2.11.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3"
+  }
+}
