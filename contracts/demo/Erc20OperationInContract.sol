@@ -10,6 +10,11 @@ contract Erc20OperationInContract{
     address public LTT = address(0x6290e73F470685a149d182043299cC7e23eAb491);
     address public LTT2 = address(0xe002dAB5DAD72AbB016d6A8e9B2bcdAD5B459e5e);
 
+    //SELECTOR常量值为'transfer(address,uint256)'字符串哈希值的前4位16进制数字
+    bytes4 private constant SELECTOR = bytes4(
+        keccak256(bytes("transfer(address,uint256)"))
+    );
+
     bool public approveResult;
 
     function getBalanceB1() external view returns(uint256 _b1){
@@ -33,6 +38,25 @@ contract Erc20OperationInContract{
     function testTransfer(address _to) public  {
         uint256 value = IERC20(LTT).balanceOf(address(this));
         IERC20(LTT).transfer(_to, value);
+    }
+
+    // 在不使用接口合约时调用另个合约的方法为底层呼叫
+    // 通过底层呼叫的形式实现ERC20 Transfer
+    function testTransferUseCall(
+        address token,
+        address to,
+        uint256 value
+    ) public {
+        //调用token合约地址的低级transfer方法
+        //solium-disable-next-line
+        (bool success, bytes memory data) = token.call(
+            abi.encodeWithSelector(SELECTOR, to, value)
+        );
+        //确认返回值为true并且返回的data长度为0或者解码后为true
+        require(
+            success && (data.length == 0 || abi.decode(data, (bool))),
+            "Mine contract: TRANSFER_FAILED"
+        );
     }
 
     // TransferFrom一般用于合约从用户钱包地址中提走Token，需要先调用approve方法
